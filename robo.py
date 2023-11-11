@@ -66,3 +66,26 @@ class RoboAspirador:
             return chr(max(ord(self.posicao) - 1, ord('A')))
 
     time.sleep(1)
+
+    # Função principal
+def main():
+    robo = RoboAspirador()
+
+    while not robo.objetivo_alcancado():
+        print(f"Posição atual: {robo.posicao}, Energia: {robo.energia}, Bolsa: {robo.bolsa_sujeira}")
+
+        acao = robo.acao_tomar()
+
+        if acao == 'mover':
+            direcao = robo.direcao_seguir()
+            robo.mover(direcao)
+        elif acao == 'aspirar':
+            robo.aspirar()
+        elif acao == 'voltar_casa':
+            robo.voltar_para_casa()
+        elif acao == 'sem_energia':
+            print("O robô ficou sem energia. Tarefa interrompida.")
+            break
+
+    print("Tarefa concluída! O robô voltou para casa.")
+    print(f"Energia restante: {robo.energia}, Bolsa: {robo.bolsa_sujeira}")
